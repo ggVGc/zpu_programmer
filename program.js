@@ -1,3 +1,14 @@
+
+// Very useless demo program showcasing the available instructions.
+// Walks accors each pixel in the "screen" (4x4 grid of memory-mapped pixels),
+// picks a random value, and sets the brightness of the next pixel to this value.
+// The last pixel is used as storage for the next brightness value.
+//
+// NOTES:
+// - This code is self-modifying since there is no indexing register available.
+// - There are currently issues with memory indexing,
+//   so modifyomg locations of instructions might cause things to fail...
+
 var memory = [
   load_A_indirect(47), // 0 -- Fetch current brightness
   store_A(32),  // 1 -- Set LED brightness (32 is the first LED in the "screen"). This is the "LED setter"
