@@ -1,13 +1,13 @@
+let ZOIA_MIDI_PORT_NAME = "USB Midi MIDI 1";
+
+
 if (navigator.requestMIDIAccess) {
-    navigator.requestMIDIAccess({
-        sysex: false // this defaults to 'false' and we won't be covering sysex in this article. 
-    }).then(onMIDISuccess, onMIDIFailure);
+    navigator.requestMIDIAccess({sysex: false}).then(onMIDISuccess, onMIDIFailure);
 } else {
     alert("No MIDI support in your browser.");
 }
 
 function onMIDIFailure(e) {
-    // when we get a failed response, run this code
     console.log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
 }
 
@@ -99,7 +99,7 @@ function onMIDISuccess(midi) {
     let outputs = midi.outputs.values();
     for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
       console.log(output);
-        if(output.value.name == "USB Midi MIDI 1"){
+        if(output.value.name == ZOIA_MIDI_PORT_NAME){
           zoia = output.value;
           console.log("Found Zoia");
           break;
